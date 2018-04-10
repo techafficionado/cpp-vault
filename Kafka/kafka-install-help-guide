@@ -1,0 +1,129 @@
+sudo apt-get update
+sudo apt-get install default-jre
+Install Zookeeper:
+sudo apt-get install zookeeperd
+Verify Telnet:
+telnet localhost 2181
+Enter ruok and verify imok
+Add User:
+sudo adduser --system --no-create-home --disabled-password --disabled-login kafka
+Download Kafka:
+wget "http://www-eu.apache.org/dist/kafka/1.0.1/kafka_2.12-1.0.1.tgz"
+Check File Integrity:
+curl http://kafka.apache.org/KEYS | gpg --import
+wget https://dist.apache.org/repos/dist/release/kafka/1.0.1/kafka_2.12-1.0.1.tgz.asc
+gpg --verify kafka_2.12-1.0.1.tgz.asc kafka_2.12-1.0.1.tgz
+Create Kafka directory:
+sudo mkdir /opt/kafka
+sudo tar -xvzf kafka_2.12-1.0.1.tgz --directory /opt/kafka --strip-components 1
+Configure Kafka:
+sudo mkdir /var/lib/kafka
+sudo mkdir /var/lib/kafka/data
+Open properties file:
+sudo vi /opt/kafka/config/server.properties
+Add the following:
+delete.topic.enable = true
+Update logs dir:
+log.dirs=/var/lib/kafka/data
+Update permissions:
+sudo chown -R kafka:nogroup /opt/kafka
+sudo chown -R kafka:nogroup /var/lib/kafka
+Start Kafka:
+sudo /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties
+If out of memory java error, modify /opt/kafka/bin/kafka-server-start.sh heap options 
+export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M"
+
+opt/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+>Hello world
+>hey there
+
+/opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
+
+
+root@ip-172-31-47-239:/home/ubuntu# /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --group console-consumer-73395 --offset 'earliest' --partition 0
+Hello world
+hey there
+hello consumer
+are you there
+you are awesome
+and so cool
+
+
+
+Options:
+root@ip-172-31-47-239:/home/ubuntu# /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --group console-consume                        r-73395 --offset 'latest' --partion __consumer_offsets-0
+partion is not a recognized option
+Option                                   Description
+------                                   -----------
+--blacklist <String: blacklist>          Blacklist of topics to exclude from
+                                           consumption.
+--bootstrap-server <String: server to    REQUIRED (unless old consumer is
+  connect to>                              used): The server to connect to.
+--consumer-property <String:             A mechanism to pass user-defined
+  consumer_prop>                           properties in the form key=value to
+                                           the consumer.
+--consumer.config <String: config file>  Consumer config properties file. Note
+                                           that [consumer-property] takes
+                                           precedence over this config.
+--csv-reporter-enabled                   If set, the CSV metrics reporter will
+                                           be enabled
+--delete-consumer-offsets                If specified, the consumer path in
+                                           zookeeper is deleted when starting up
+--enable-systest-events                  Log lifecycle events of the consumer
+                                           in addition to logging consumed
+                                           messages. (This is specific for
+                                           system tests.)
+--formatter <String: class>              The name of a class to use for
+                                           formatting kafka messages for
+                                           display. (default: kafka.tools.
+                                           DefaultMessageFormatter)
+--from-beginning                         If the consumer does not already have
+                                           an established offset to consume
+                                           from, start with the earliest
+                                           message present in the log rather
+                                           than the latest message.
+--group <String: consumer group id>      The consumer group id of the consumer.
+--isolation-level <String>               Set to read_committed in order to
+                                           filter out transactional messages
+                                           which are not committed. Set to
+                                           read_uncommittedto read all
+                                           messages. (default: read_uncommitted)
+--key-deserializer <String:
+  deserializer for key>
+--max-messages <Integer: num_messages>   The maximum number of messages to
+                                           consume before exiting. If not set,
+                                           consumption is continual.
+--metrics-dir <String: metrics           If csv-reporter-enable is set, and
+  directory>                               this parameter isset, the csv
+                                           metrics will be output here
+--new-consumer                           Use the new consumer implementation.
+                                           This is the default, so this option
+                                           is deprecated and will be removed in
+                                           a future release.
+--offset <String: consume offset>        The offset id to consume from (a non-
+                                           negative number), or 'earliest'
+                                           which means from beginning, or
+                                           'latest' which means from end
+                                           (default: latest)
+--partition <Integer: partition>         The partition to consume from.
+                                           Consumption starts from the end of
+                                           the partition unless '--offset' is
+                                           specified.
+--property <String: prop>                The properties to initialize the
+                                           message formatter.
+--skip-message-on-error                  If there is an error when processing a
+                                           message, skip it instead of halt.
+--timeout-ms <Integer: timeout_ms>       If specified, exit if no message is
+                                           available for consumption for the
+                                           specified interval.
+--topic <String: topic>                  The topic id to consume on.
+--value-deserializer <String:
+  deserializer for values>
+--whitelist <String: whitelist>          Whitelist of topics to include for
+                                           consumption.
+--zookeeper <String: urls>               REQUIRED (only when using old
+                                           consumer): The connection string for
+                                           the zookeeper connection in the form
+                                           host:port. Multiple URLS can be
+                                           given to allow fail-over.
+
