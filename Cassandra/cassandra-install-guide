@@ -1,0 +1,140 @@
+echo "deb http://www.apache.org/dist/cassandra/debian 311x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+sudo apt-key adv --keyserver pool.sks-keyservers.net --recv-key A278B781FE4B2BDA
+sudo apt-get update
+sudo apt-get install cassandra
+ubuntu@ip-172-31-47-239:~$ sudo systemctl start cassandra.service
+ubuntu@ip-172-31-47-239:~$ sudo systemctl status cassandra.service
+
+ubuntu@ip-172-31-47-239:~$ nodetool status
+Datacenter: datacenter1
+=======================
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address    Load       Tokens       Owns (effective)  Host ID                               Rack
+UN  127.0.0.1  103.7 KiB  256          100.0%            c8a5fd5e-3208-4c82-90a1-52208eafa788  rack1
+
+ubuntu@ip-172-31-47-239:~$ cqlsh
+Connected to Test Cluster at 127.0.0.1:9042.
+[cqlsh 5.0.1 | Cassandra 3.11.2 | CQL spec 3.4.4 | Native protocol v4]
+Use HELP for help.
+cqlsh> CREATE KEYSPACE moviedb WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' :                                                                                      1 };
+cqlsh> use moviedb;
+cqlsh:moviedb> show tables;
+Improper show command.
+cqlsh:moviedb> CREATE TABLE movies (id int PRIMARY KEY,title text,year text);
+cqlsh:moviedb> select * from movies;
+
+ id | title | year
+----+-------+------
+
+
+
+CREATE KEYSPACE moviedb WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' :                                                                                      1 };
+cqlsh> use moviedb;
+cqlsh:moviedb> show tables;
+Improper show command.
+cqlsh:moviedb> CREATE TABLE movies (id int PRIMARY KEY,title text,year text);
+cqlsh:moviedb> select * from movies;
+
+ id | title | year
+----+-------+------
+
+(0 rows)
+cqlsh:moviedb> desc movies;
+
+CREATE TABLE moviedb.movies (
+    id int PRIMARY KEY,
+    title text,
+    year text
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max                                                                                     _threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compr                                                                                     essor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+cqlsh:moviedb> CREATE INDEX movies_title_idx ON moviedb.movies (title);
+cqlsh:moviedb> desc movies;
+
+CREATE TABLE moviedb.movies (
+    id int PRIMARY KEY,
+    title text,
+    year text
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max                                                                                     _threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compr                                                                                     essor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+CREATE INDEX movies_title_idx ON moviedb.movies (title);
+
+cqlsh:moviedb> INSERT INTO movies (id,title,year) VALUES (1, 'Birdman','2014');
+
+
+
+cqlsh:moviedb> CREATE INDEX movies_title_idx ON moviedb.movies (title);
+cqlsh:moviedb> desc movies;
+
+CREATE TABLE moviedb.movies (
+    id int PRIMARY KEY,
+    title text,
+    year text
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max                                                                                     _threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compr                                                                                     essor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+CREATE INDEX movies_title_idx ON moviedb.movies (title);
+
+cqlsh:moviedb> INSERT INTO movies (id,title,year) VALUES (1, 'Birdman','2014');
+cqlsh:moviedb> select * from movies;
+
+ id | title   | year
+----+---------+------
+  1 | Birdman | 2014
+
+(1 rows)
+cqlsh:moviedb> INSERT INTO movies (id,title,year) VALUES (2, '12 Years a Slave','2013');
+cqlsh:moviedb> select * from movies;
+
+ id | title            | year
+----+------------------+------
+  1 |          Birdman | 2014
+  2 | 12 Years a Slave | 2013
+
+(2 rows)
+cqlsh:moviedb> select * from movies where title=Birdman;
+SyntaxException: line 1:40 no viable alternative at input ';' (...* from movies where title=[Birdman];                                                                                     )
+cqlsh:moviedb> select * from movies where title='Birdman';
+
+ id | title   | year
+----+---------+------
+  1 | Birdman | 2014
+
+
+
