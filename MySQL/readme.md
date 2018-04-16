@@ -10,4 +10,6 @@ explain select * from Position1 where RowYearDayCode>2018104 and RowYearDayCode<
 +----+-------------+-----------+-------------------------+------+---------------+------+---------+------+------+----------+-------------+
 1 row in set, 1 warning (0.00 sec)
 
-
+Best Practices:
+> Do not have more than 50 partitions to avoid slowing down of queries.
+> My tests showed that including the partition condition reduced query time by half.
