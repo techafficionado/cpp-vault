@@ -23,7 +23,7 @@ class Solution {
                 len1 = checkPalinLen(s, i , i);
                 len2 = checkPalinLen(s, i, i+1);    
                 maxlen = Math.max(len1, len2);
-                if (maxlen> end-start){
+                if (maxlen> end-start+1){
                     start = i - (maxlen-1)/2;
                     end = i+maxlen/2;
                 }
