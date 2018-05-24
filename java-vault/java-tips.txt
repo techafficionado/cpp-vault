@@ -1,0 +1,3 @@
+use charAt to iterate through string (no index level access)
+for list of lists
+List<List <String>> = new ArrayList<List <String>>
