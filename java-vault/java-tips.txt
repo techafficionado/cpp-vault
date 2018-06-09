@@ -1,3 +1,6 @@
 use charAt to iterate through string (no index level access)
 for list of lists
 List<List <String>> = new ArrayList<List <String>>
+
+Converting String to Array:
+char[] stringToCharArray = teststring.toCharArray();
