@@ -8,3 +8,4 @@ char[] stringToCharArray = teststring.toCharArray();
 Converting char array to string:
 char[] myString = new char[] {'T', 'H', 'I', 'S', ' ',  'I', 'S', ' ', 'T', 'E', 'S', 'T'};
 String output1 = new String(myString);
+String output2 = String.valueOf(myString);
