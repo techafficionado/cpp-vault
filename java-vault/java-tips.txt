@@ -4,3 +4,7 @@ List<List <String>> = new ArrayList<List <String>>
 
 Converting String to Array:
 char[] stringToCharArray = teststring.toCharArray();
+
+Converting char array to string:
+char[] myString = new char[] {'T', 'H', 'I', 'S', ' ',  'I', 'S', ' ', 'T', 'E', 'S', 'T'};
+String output1 = new String(myString);
