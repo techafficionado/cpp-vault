@@ -9,3 +9,9 @@ Converting char array to string:
 char[] myString = new char[] {'T', 'H', 'I', 'S', ' ',  'I', 'S', ' ', 'T', 'E', 'S', 'T'};
 String output1 = new String(myString);
 String output2 = String.valueOf(myString);
+
+Convert String Arraylist to String Array:
+static List<String> gbrackets = new ArrayList<String>();
+String[] gbs = new String[gbrackets.size()];
+BracketsUtil(brackets,0,0,n);        
+gbs = gbrackets.toArray(gbs);
