@@ -15,3 +15,6 @@ static List<String> gbrackets = new ArrayList<String>();
 String[] gbs = new String[gbrackets.size()];
 BracketsUtil(brackets,0,0,n);        
 gbs = gbrackets.toArray(gbs);
+
+// Convert String Array to List
+List<String> list = Arrays.asList(alphabet);
