@@ -18,3 +18,19 @@ gbs = gbrackets.toArray(gbs);
 
 // Convert String Array to List
 List<String> list = Arrays.asList(alphabet);
+
+
+List of Lists
+ArrayList<ArrayList<Integer>> listOfLists = new ArrayList<ArrayList<Integer>>();
+		
+Map<Integer, Integer> hm = new HashMap<>();
+
+// iterate upper diagonal after major
+
+for(int i=1;i<a[0].length;i++) {
+	    		row=0;
+	    		col=i;
+	    		while(col<a[0].length && row<a.length) 
+          {
+          }
+}
