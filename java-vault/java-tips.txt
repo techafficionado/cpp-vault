@@ -32,5 +32,14 @@ for(int i=1;i<a[0].length;i++) {
 	    		col=i;
 	    		while(col<a[0].length && row<a.length) 
           {
+	  	row++;
+		col++;
           }
+}
+
+// iterate a hashmap
+for (Map.Entry<String, Object> entry : map.entrySet()) {
+    String key = entry.getKey();
+    Object value = entry.getValue();
+    // ...
 }
