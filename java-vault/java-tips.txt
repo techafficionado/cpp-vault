@@ -43,3 +43,7 @@ for (Map.Entry<String, Object> entry : map.entrySet()) {
     Object value = entry.getValue();
     // ...
 }
+
+
+ArrayList<Element> arrayList = new ArrayList<Element>(Arrays.asList(array));
+https://www.programcreek.com/2013/04/how-to-convert-array-to-arraylist-in-java/
