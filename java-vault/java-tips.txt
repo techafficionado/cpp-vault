@@ -51,3 +51,11 @@ https://www.programcreek.com/2013/04/how-to-convert-array-to-arraylist-in-java/
 JAVA Queue:
 
 Queue<Integer> q = new LinkedList<>();
+
+ITerate a hashset:
+
+ Iterator<String> it = hset.iterator();
+     while(it.hasNext()){
+        System.out.println(it.next());
+     }
+     
