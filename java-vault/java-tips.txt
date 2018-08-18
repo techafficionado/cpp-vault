@@ -59,3 +59,10 @@ ITerate a hashset:
         System.out.println(it.next());
      }
      
+/* convert set to an array in similar way to list */     
+Set<String> list = new HashSet<String>();    	
+//neuroUtil(word, i, j, list, 0);
+String [] output = new String[list.size()];
+output = list.toArray(output);
+//printarray(output);
+return output;
