@@ -66,3 +66,8 @@ String [] output = new String[list.size()];
 output = list.toArray(output);
 //printarray(output);
 return output;
+
+// return an array
+if (s.length() == 1)
+    return new int[]{0, 1, 0};
+
