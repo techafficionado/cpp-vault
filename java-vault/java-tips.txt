@@ -1,0 +1,73 @@
+use charAt to iterate through string (no index level access)
+for list of lists
+List<List <String>> = new ArrayList<List <String>>
+
+Converting String to Array:
+char[] stringToCharArray = teststring.toCharArray();
+
+Converting char array to string:
+char[] myString = new char[] {'T', 'H', 'I', 'S', ' ',  'I', 'S', ' ', 'T', 'E', 'S', 'T'};
+String output1 = new String(myString);
+String output2 = String.valueOf(myString);
+
+Convert String Arraylist to String Array:
+static List<String> gbrackets = new ArrayList<String>();
+String[] gbs = new String[gbrackets.size()];
+BracketsUtil(brackets,0,0,n);        
+gbs = gbrackets.toArray(gbs);
+
+// Convert String Array to List
+List<String> list = Arrays.asList(alphabet);
+
+
+List of Lists
+ArrayList<ArrayList<Integer>> listOfLists = new ArrayList<ArrayList<Integer>>();
+		
+Map<Integer, Integer> hm = new HashMap<>();
+
+// iterate upper diagonal after major
+
+for(int i=1;i<a[0].length;i++) {
+	    		row=0;
+	    		col=i;
+	    		while(col<a[0].length && row<a.length) 
+          {
+	  	row++;
+		col++;
+          }
+}
+
+// iterate a hashmap
+for (Map.Entry<String, Object> entry : map.entrySet()) {
+    String key = entry.getKey();
+    Object value = entry.getValue();
+    // ...
+}
+
+
+ArrayList<Element> arrayList = new ArrayList<Element>(Arrays.asList(array));
+https://www.programcreek.com/2013/04/how-to-convert-array-to-arraylist-in-java/
+
+JAVA Queue:
+
+Queue<Integer> q = new LinkedList<>();
+
+ITerate a hashset:
+
+ Iterator<String> it = hset.iterator();
+     while(it.hasNext()){
+        System.out.println(it.next());
+     }
+     
+/* convert set to an array in similar way to list */     
+Set<String> list = new HashSet<String>();    	
+//neuroUtil(word, i, j, list, 0);
+String [] output = new String[list.size()];
+output = list.toArray(output);
+//printarray(output);
+return output;
+
+// return an array
+if (s.length() == 1)
+    return new int[]{0, 1, 0};
+
